@@ -2,13 +2,13 @@
 
 ## Rahel Arka
 
-### date x
+### 5/19 - 5/21
 
-info
+MIA
 
-### date y
+### 5/22
 
-info
+Created polybius square and coordinate function to get char array of encrypted pairs. Also created makefile
 
 
 ## GROUP MEMBER 2
