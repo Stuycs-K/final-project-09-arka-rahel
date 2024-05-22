@@ -1,6 +1,6 @@
 # Work Log
 
-## GROUP MEMBER 1
+## Rahel Arka
 
 ### date x
 
