@@ -14,7 +14,7 @@ char polybius_square[SIZE][SIZE] = {
     {'4', '5', '6', '7', '8', '9'}
 };
 
-void get_coordinates(char c, int *row, int *col) {
+void coordinate(char c, int *row, int *col) {
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
             if (polybius_square[i][j] == c) {
@@ -25,11 +25,25 @@ void get_coordinates(char c, int *row, int *col) {
         }
     }
 }
-
+char *encryptsquare(char *plaintext){
+    int len =strlen(plaintext);
+    char *temp = malloc(len*2+1);
+    for(int i = 0; i < len; i++){
+        int row;
+        int col;
+        coordinate(plaintext[i], &row, &col);
+        temp[2 * i] = LETTERS[row];
+        temp[2 * i + 1] = LETTERS[col];
+    }
+    temp[len * 2] = '\0';
+    printf("temp: %s\n", temp);
+    return temp;
+}
 
 int main() {
     char plaintext[] = "BERLIN";
     // char key[] = "CODE";
+    encryptsquare(plaintext);
     
     
    
