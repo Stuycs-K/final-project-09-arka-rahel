@@ -39,13 +39,43 @@ char *encryptsquare(char *plaintext){
     printf("temp: %s\n", temp);
     return temp;
 }
+int compare_chars(const void *a, const void *b) {
+    return (*(char *)a - *(char *)b);
+}
+// char *transpose(char *intermediate, char *key) {
+//     int len = strlen(intermediate);
+//     int key_len = strlen(key);
+//     int num_rows = len / key_len;
 
+//     char sorted_key[key_len + 1];
+//     strcpy(sorted_key, key);
+//     qsort(sorted_key, key_len, sizeof(char), compare_chars);
+
+//     char *transposed = malloc(len + 1);
+
+//     for (int i = 0; i < key_len; i++) {
+//         int col = strchr(key, sorted_key[i]) - key;
+//         for (int j = 0; j < num_rows; j++) {
+//             transposed[i * num_rows + j] = intermediate[j * key_len + col];
+//         }
+//     }
+//     transposed[len] = '\0';
+//     return transposed;
+// }
+char *encrypt(char *plaintext, char *key) {
+    char *intermediate = encryptsquare(plaintext);
+    char *ciphertext = transpose(intermediate, key);
+    free(intermediate);
+    return ciphertext;
+}
 int main() {
     char plaintext[] = "BERLIN";
-    // char key[] = "CODE";
-    encryptsquare(plaintext);
+    char key[] = "CODE";
     
+    char *ciphertext = encrypt(plaintext, key);
     
-   
+    printf("Ciphertext: %s\n", ciphertext);
+    
+    free(ciphertext);
     return 0;
 }
