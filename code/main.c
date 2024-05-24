@@ -42,26 +42,30 @@ char *encryptsquare(char *plaintext){
 int compare_chars(const void *a, const void *b) {
     return (*(char *)a - *(char *)b);
 }
-// char *transpose(char *intermediate, char *key) {
-//     int len = strlen(intermediate);
-//     int key_len = strlen(key);
-//     int num_rows = len / key_len;
+char *transpose(char *intermediate, char *key) {
+    int len = strlen(intermediate);
+    int key_len = strlen(key);
+    int num_rows = (len + key_len - 1) / key_len;
 
-//     char sorted_key[key_len + 1];
-//     strcpy(sorted_key, key);
-//     qsort(sorted_key, key_len, sizeof(char), compare_chars);
+    char sorted_key[key_len + 1];
+    strcpy(sorted_key, key);
+    qsort(sorted_key, key_len, sizeof(char), compare_chars);
 
-//     char *transposed = malloc(len + 1);
+    char *transposed = malloc(len + 1);
+    int transposed_index = 0;
 
-//     for (int i = 0; i < key_len; i++) {
-//         int col = strchr(key, sorted_key[i]) - key;
-//         for (int j = 0; j < num_rows; j++) {
-//             transposed[i * num_rows + j] = intermediate[j * key_len + col];
-//         }
-//     }
-//     transposed[len] = '\0';
-//     return transposed;
-// }
+    for (int i = 0; i < key_len; i++) {
+        int col = strchr(key, sorted_key[i]) - key;
+        for (int j = 0; j < num_rows; j++) {
+            int index = j * key_len + col;
+            if (index < len) {
+                transposed[transposed_index++] = intermediate[index];
+            }
+        }
+    }
+    transposed[transposed_index] = '\0';
+    return transposed;
+}
 char *encrypt(char *plaintext, char *key) {
     char *intermediate = encryptsquare(plaintext);
     char *ciphertext = transpose(intermediate, key);
@@ -69,8 +73,8 @@ char *encrypt(char *plaintext, char *key) {
     return ciphertext;
 }
 int main() {
-    char plaintext[] = "BERLIN";
-    char key[] = "CODE";
+    char plaintext[] = "AJFBGOIAUSDBGOIADFBGOAUHFGBO";
+    char key[] = "POW";
     
     char *ciphertext = encrypt(plaintext, key);
     
@@ -79,3 +83,18 @@ int main() {
     free(ciphertext);
     return 0;
 }
+// DDAAVAFFGAGAGFGADDDFAAVGAFDF
+
+// DDAAVAFFGAGAGFGADDDFAAVGAFDF
+
+// GDFGDDGDAADAAAADFAAGXFAXFAAAAXFFDFDDDFAFADADAAAFGGFAAFDA
+// GDFGDDGDAADAAAADFAAGXFAXFAAAAXFFDFDDDFAFADADAAAFGGFAAFDA
+
+// AADGDAAAAFAADGDAAAAFDDAAFADGDXFFDFXFDDGAAGFGAFAADFAAADAXF   This is with key with repeating characters
+// AADGDAAAAFAFGADAFDADDAAFADGDXFFDFXFDDGAAGFGAFAADFAAADAXF
+
+// AADFFGAAADAADFADXAFAGAADAGGDFAGAAAFAAFAGAADAGGDFAGAAAFAAF
+// AADFFGAAADAADFADXAFAGAADAGGDFAGAAAFAAFDXDFAFADFFAXDFGDDD
+
+AADFFGAAADAADFADXAFAGAADAGGDFAGAAAFAAFDXDFAFADFFAXDFGDDD
+AADFFGAAADAADFADXAFAGAADAGGDFAGAAAFAAFDXDFAFADFFAXDFGDDD
