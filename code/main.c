@@ -81,39 +81,41 @@ char *reverse_transpose(char *ciphertext, char *key) {
     strcpy(sorted_key, key);
     qsort(sorted_key, key_len, sizeof(char), compare_chars);
 
-    char *intermediate = malloc(len + 1);
+    char *tempa = malloc(len + 1);
 
     for (int i = 0; i < key_len; i++) {
         int col = strchr(key, sorted_key[i]) - key;
         for (int j = 0; j < num_rows; j++) {
-            intermediate[j * key_len + col] = ciphertext[i * num_rows + j];
+            tempa[j * key_len + col] = ciphertext[i * num_rows + j];
         }
     }
-    intermediate[len] = '\0';
-    printf("Intermediate: %s\n", intermediate);
-    return intermediate;
+    tempa[len] = '\0';
+    printf("tempa: %s\n", tempa);
+    return tempa;
 }
 
-// char *adfgvx_decrypt(char *ciphertext, char *key) {
-//     char *intermediate = reverse_transpose(ciphertext, key);
-//     int len = strlen(intermediate);
-//     char *plaintext = malloc((len / 2) + 1);
+char *adfgvx_decrypt(char *ciphertext, char *key) {
+    char *intermediate = reverse_transpose(ciphertext, key);
+    int len = strlen(intermediate);
+    char *plaintext = malloc((len / 2) + 1);
 
-//     for (int i = 0; i < len / 2; i++) {
-//         int row = strchr(LETTERS, intermediate[2 * i]) - LETTERS;
-//         int col = strchr(LETTERS, intermediate[2 * i + 1]) - LETTERS;
-//         plaintext[i] = polybius_square[row][col];
-//     }
+    for (int i = 0; i < len / 2; i++) {
+        int row = strchr(LETTERS, intermediate[2 * i]) - LETTERS;
+        int col = strchr(LETTERS, intermediate[2 * i + 1]) - LETTERS;
+        plaintext[i] = polybius_square[row][col];
+    }
     plaintext[len / 2] = '\0';
     free(intermediate);
     return plaintext;
 }
 
 int main() {
+    char plain[] = "BERLIN";
     char ciphertext[] = "AFDADFVXDDXF"; // BERLIN
     char key[] = "CODE";
-
+    char *cipher = encrypt(plain, key);
     char *plaintext = adfgvx_decrypt(ciphertext, key);
+    printf("Ciphertext: %s\n", cipher);
     printf("Plaintext: %s\n", plaintext);
 
     free(plaintext);
