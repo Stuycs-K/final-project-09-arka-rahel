@@ -110,14 +110,10 @@ char *adfgvx_decrypt(char *ciphertext, char *key) {
 }
 
 int main() {
-    char plain[] = "BERLIN";
-    char ciphertext[] = "AFDADFVXDDXF"; // BERLIN
-    char key[] = "CODE";
-    char *cipher = encrypt(plain, key);
+    char ciphertext[] = "AGFAVDFFAAGGDAFDDFDDVDAGDAAFAA"; // BERLIN
+    char key[] = "MONKEY";
     char *plaintext = adfgvx_decrypt(ciphertext, key);
-    printf("Ciphertext: %s\n", cipher);
     printf("Plaintext: %s\n", plaintext);
-
     free(plaintext);
     return 0;
 }
