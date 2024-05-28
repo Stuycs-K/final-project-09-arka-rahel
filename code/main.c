@@ -25,7 +25,7 @@ void coordinate(char c, int *row, int *col) {
         }
     }
 }
-char *encryptsquare(char *plaintext){
+char *encryptSquare(char *plaintext){
     int len =strlen(plaintext);
     char *temp = malloc(len*2+1);
     for(int i = 0; i < len; i++){
@@ -67,20 +67,56 @@ char *transpose(char *intermediate, char *key) {
     return transposed;
 }
 char *encrypt(char *plaintext, char *key) {
-    char *intermediate = encryptsquare(plaintext);
+    char *intermediate = encryptSquare(plaintext);
     char *ciphertext = transpose(intermediate, key);
     free(intermediate);
     return ciphertext;
 }
+char *reverse_transpose(char *ciphertext, char *key) {
+    int len = strlen(ciphertext);
+    int key_len = strlen(key);
+    int num_rows = len / key_len;
+
+    char sorted_key[key_len + 1];
+    strcpy(sorted_key, key);
+    qsort(sorted_key, key_len, sizeof(char), compare_chars);
+
+    char *intermediate = malloc(len + 1);
+
+    for (int i = 0; i < key_len; i++) {
+        int col = strchr(key, sorted_key[i]) - key;
+        for (int j = 0; j < num_rows; j++) {
+            intermediate[j * key_len + col] = ciphertext[i * num_rows + j];
+        }
+    }
+    intermediate[len] = '\0';
+    printf("Intermediate: %s\n", intermediate);
+    return intermediate;
+}
+
+// char *adfgvx_decrypt(char *ciphertext, char *key) {
+//     char *intermediate = reverse_transpose(ciphertext, key);
+//     int len = strlen(intermediate);
+//     char *plaintext = malloc((len / 2) + 1);
+
+//     for (int i = 0; i < len / 2; i++) {
+//         int row = strchr(LETTERS, intermediate[2 * i]) - LETTERS;
+//         int col = strchr(LETTERS, intermediate[2 * i + 1]) - LETTERS;
+//         plaintext[i] = polybius_square[row][col];
+//     }
+    plaintext[len / 2] = '\0';
+    free(intermediate);
+    return plaintext;
+}
+
 int main() {
-    char plaintext[] = "AJFBGOIAUSDBGOIADFBGOAUHFGBO";
-    char key[] = "POW";
-    
-    char *ciphertext = encrypt(plaintext, key);
-    
-    printf("Ciphertext: %s\n", ciphertext);
-    
-    free(ciphertext);
+    char ciphertext[] = "AFDADFVXDDXF"; // BERLIN
+    char key[] = "CODE";
+
+    char *plaintext = adfgvx_decrypt(ciphertext, key);
+    printf("Plaintext: %s\n", plaintext);
+
+    free(plaintext);
     return 0;
 }
 // DDAAVAFFGAGAGFGADDDFAAVGAFDF
@@ -96,5 +132,5 @@ int main() {
 // AADFFGAAADAADFADXAFAGAADAGGDFAGAAAFAAFAGAADAGGDFAGAAAFAAF
 // AADFFGAAADAADFADXAFAGAADAGGDFAGAAAFAAFDXDFAFADFFAXDFGDDD
 
-AADFFGAAADAADFADXAFAGAADAGGDFAGAAAFAAFDXDFAFADFFAXDFGDDD
-AADFFGAAADAADFADXAFAGAADAGGDFAGAAAFAAFDXDFAFADFFAXDFGDDD
+// AADFFGAAADAADFADXAFAGAADAGGDFAGAAAFAAFDXDFAFADFFAXDFGDDD
+// AADFFGAAADAADFADXAFAGAADAGGDFAGAAAFAAFDXDFAFADFFAXDFGDDD
