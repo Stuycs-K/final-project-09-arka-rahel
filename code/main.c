@@ -14,6 +14,18 @@ char polybius_square[SIZE][SIZE] = {
     {'4', '5', '6', '7', '8', '9'}
 };
 
+char* text(char* file_name) { 
+    FILE *file = fopen(file_name, "r");
+    fseek(file, 0, SEEK_END);
+    long length = ftell(file);
+    fseek(file, 0, SEEK_SET);
+    char *text = malloc(length + 1);
+    fread(text, 1, length, file);
+    text[length] = 0;
+    fclose(file);
+    return text;
+}
+
 void coordinate(char c, int *row, int *col) {
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
@@ -110,11 +122,20 @@ char *decrypt(char *ciphertext, char *key) {
 }
 
 int main() {
-    char plaintext[] = "HELLOWORLDREDGREENBLUEPERMUTATIONSBRUTEFORCE"; // BERLIN
-    char key[] = "MONKEY";
-    char *ciphertext = encrypt(plaintext, key);
-    printf("ciphertext: %s\n", ciphertext);
-    free(ciphertext);
+    // char plaintext[] = "HELLOWORLDREDGREENBLUEPERMUTATIONSBRUTEFORCE"; // BERLIN
+    // char key[] = "MONKEY";
+    // char *ciphertext = encrypt(plaintext, key);
+    // printf("ciphertext: %s\n", ciphertext);
+    // free(ciphertext);
+
+    // char ciphertext[] = "FFAFAADAFAFFDDAGADDFFFXDDDFFDXADAGAVFFGV";
+    // char key[] = "CODE";
+    // char *plaintext = decrypt(ciphertext, key);
+    // printf("plaintext: %s\n", plaintext);
+    // free(plaintext);
+    char *txt = text(alice.txt);
+    printf("string: %s\n", txt);
+
     return 0;
 }
 // DDAAVAFFGAGAGFGADDDFAAVGAFDF
