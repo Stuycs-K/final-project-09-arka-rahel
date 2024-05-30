@@ -94,7 +94,7 @@ char *reverse_transpose(char *ciphertext, char *key) {
     return tempa;
 }
 
-char *adfgvx_decrypt(char *ciphertext, char *key) {
+char *decrypt(char *ciphertext, char *key) {
     char *intermediate = reverse_transpose(ciphertext, key);
     int len = strlen(intermediate);
     char *plaintext = malloc((len / 2) + 1);
@@ -110,11 +110,11 @@ char *adfgvx_decrypt(char *ciphertext, char *key) {
 }
 
 int main() {
-    char ciphertext[] = "AGFAVDFFAAGGDAFDDFDDVDAGDAAFAA"; // BERLIN
+    char plaintext[] = "HELLOWORLDREDGREENBLUEPERMUTATIONSBRUTEFORCE"; // BERLIN
     char key[] = "MONKEY";
-    char *plaintext = adfgvx_decrypt(ciphertext, key);
-    printf("Plaintext: %s\n", plaintext);
-    free(plaintext);
+    char *ciphertext = encrypt(plaintext, key);
+    printf("ciphertext: %s\n", ciphertext);
+    free(ciphertext);
     return 0;
 }
 // DDAAVAFFGAGAGFGADDDFAAVGAFDF
@@ -132,3 +132,6 @@ int main() {
 
 // AADFFGAAADAADFADXAFAGAADAGGDFAGAAAFAAFDXDFAFADFFAXDFGDDD
 // AADFFGAAADAADFADXAFAGAADAGGDFAGAAAFAAFDXDFAFADFFAXDFGDDD
+
+// DGDAFFGAGGFFAFVFXXAVXGAAFDDFVDDFAAAAAFGDGGAAAFFFDADFFAFAGFADXFGGVDVXDFAFXFXVXVXDFVFDDXVX
+// DGDAFFGAGGFFAFVFXXAVXGAAFDDFVDDFAAAAAFGDGGAAAFFFDADFFAFAGFADXFGGVDVXDFAFXFXVXVXDFVFDDXVX
