@@ -3,3 +3,4 @@
 ## Group Info
 ## Overview
 ## Instructions
+For my program there are only two commands: ```make encode``` and ```make decode```. After you compile using ```make compile```, running either encode or decode will prompt you to type in your plaintext or ciphertext. You will then be prompted to type in your KEYWORD and then your text will be encoded or decoded depending on what command you used.
