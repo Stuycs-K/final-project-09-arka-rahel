@@ -26,6 +26,26 @@ Created reverse transpose and decrypt to get intermediate text and retrieve norm
 
 Worked on slides and fixed bugs with edge cases.
 
+### 5/30
+
+Fixed really long key bug.
+
+### 5/31
+
+Worked on slides and finished the teaching part of video
+
+
+### 6/04
+
+### 6/05
+
+### 6/06
+
+### 6/07
+
+
+
+
 
 
 ## GROUP MEMBER 2
