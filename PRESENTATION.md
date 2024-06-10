@@ -16,3 +16,13 @@ For example: The keyword CODE gives the transposition 1,3,4,2 because C(1),O(2),
 The intermediate message is written by rows in a table whose width is the key size.
 
 ![image](https://github.com/Stuycs-K/final-project-09-arka-rahel/assets/113141652/0e2eae0e-3ca2-40bd-ab56-5910453a8776)
+
+Columns are rearranged such as the permutation key.
+
+![image](https://github.com/Stuycs-K/final-project-09-arka-rahel/assets/113141652/7a95b6b6-af6c-4b74-943e-4d574d09f458)
+
+The ADFGVX final ciphertext is made by reading the letters of the table by columns starting from top to bottom and from left to right.
+
+For example: The final encrypted message is AFDADFVXDDXF
+
+The coded message is usually transmitted in Morse code to the recipient.
