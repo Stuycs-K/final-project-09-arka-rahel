@@ -1,8 +1,8 @@
 # This document is required.
-### History
+## History
 During World War I, the German Army used the ADFGVX cipher, which was manually applied in the field. It was used to send messages secretly via wireless telegraphy. The cipher is named after the six possible letters found in the ciphertext: A, D, F, G, V, and X. The letters were deliberately chosen because they differ greatly from one another in the Morse code. This reduced the risk of operator error. A French Army Lieutenant cryptanalyzed ADFGVX, which was broken in early June 1918. His method involved identifying messages with stereotyped beginnings, fractionating them, and then forming similar patterns in the ciphertext positions that corresponded to column headings in the transposition table. (After that step, extensive statistical analysis was required, which was completed entirely by hand.) It was thus only effective during periods of extremely high traffic, but this was also when the most important messages were sent.
 
-### Cipher
+## Cipher
 
 The ADFGVX encryption uses a 6x6 square grid of 36 distinct characters. The following image is a basic grid I used for the program.
 
