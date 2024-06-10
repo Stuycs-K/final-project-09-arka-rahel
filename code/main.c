@@ -48,7 +48,7 @@ char *encryptSquare(char *plaintext){
         temp[2 * i + 1] = LETTERS[col];
     }
     temp[len * 2] = '\0';
-    printf("temp: %s\n", temp);
+    
     return temp;
 }
 int compare_chars(const void *a, const void *b) {
@@ -102,7 +102,7 @@ char *reverse_transpose(char *ciphertext, char *key) {
         }
     }
     tempa[len] = '\0';
-    printf("tempa: %s\n", tempa);
+    
     return tempa;
 }
 
@@ -121,20 +121,45 @@ char *decrypt(char *ciphertext, char *key) {
     return plaintext;
 }
 
-int main() {
-    // char plaintext[] = "HELLOWORLDREDGREENBLUEPERMUTATIONSBRUTEFORCE"; // BERLIN
-    // char key[] = "MONKEY";
-    // char *ciphertext = encrypt(plaintext, key);
-    // printf("ciphertext: %s\n", ciphertext);
-    // free(ciphertext);
+int main(int argc, char* argv[]) {
+    if(strcmp(argv[1], "1") == 0) {
+        char plaintext[100];
+        char key[100];
+        printf("Enter plaintext: ");
+        fgets(plaintext, sizeof(plaintext), stdin);
+        plaintext[strcspn(plaintext, "\n")] = 0;
+
+        printf("Enter key: ");
+        fgets(key, sizeof(key), stdin);
+        key[strcspn(key, "\n")] = 0;
+    
+        char *ciphertext = encrypt(plaintext, key);
+        printf("ciphertext: %s\n", ciphertext);
+        free(ciphertext);
+    }
+    else if (strcmp(argv[1], "2") == 0) {
+        char ciphertext[100];
+        char key[100];
+        printf("Enter ciphertext: ");
+        fgets(ciphertext, sizeof(ciphertext), stdin);
+        ciphertext[strcspn(ciphertext, "\n")] = 0;
+
+        printf("Enter key: ");
+        fgets(key, sizeof(key), stdin);
+        key[strcspn(key, "\n")] = 0;
+    
+        char *plaintext = decrypt(ciphertext, key);
+        printf("plaintext: %s\n", plaintext);
+        free(plaintext);
+    }
 
     // char ciphertext[] = "FFAFAADAFAFFDDAGADDFFFXDDDFFDXADAGAVFFGV";
     // char key[] = "CODE";
     // char *plaintext = decrypt(ciphertext, key);
     // printf("plaintext: %s\n", plaintext);
     // free(plaintext);
-    char *txt = text(alice.txt);
-    printf("string: %s\n", txt);
+    // char *txt = text(alice.txt);
+    // printf("string: %s\n", txt);
 
     return 0;
 }
